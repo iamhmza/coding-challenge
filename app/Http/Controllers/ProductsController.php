@@ -18,10 +18,14 @@ class ProductsController extends Controller
     {
         $product = request()->only(['name', 'description', 'price', 'image']);
         $this->productRepository->new($product);
+
+        return redirect('/products');
     }
 
     public function destroy(Product $product)
     {
         $this->productRepository->remove($product);
+
+        return redirect('/products');
     }
 }

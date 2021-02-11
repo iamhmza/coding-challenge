@@ -20,15 +20,15 @@ class NewProductListingTest extends TestCase
             'image' => '/images/01'
         ]);
 
-        $response->assertOk();
         $this->assertCount(1, Product::all());
+        $response->assertRedirect('/products');
     }
 
     /** @test */
     public function a_product_can_be_deleted()
     {
         $this->withoutExceptionHandling();
-        $this->post('/product/store', [
+        $response = $this->post('/product/store', [
             'name' => 'product1',
             'description' => 'this is product one',
             'price' => 10,
@@ -39,5 +39,6 @@ class NewProductListingTest extends TestCase
         $this->delete('/product/' . $product->id);
 
         $this->assertCount(0, Product::all());
+        $response->assertRedirect('/products');
     }
 }
