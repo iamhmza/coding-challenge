@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::post('/product/store', 'ProductsController@store');
+Route::delete('/product/{product}', 'ProductsController@destroy');

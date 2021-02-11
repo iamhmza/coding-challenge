@@ -13,7 +13,6 @@ class NewProductListingTest extends TestCase
     /** @test */
     public function we_should_be_able_to_create_product()
     {
-        $this->withoutExceptionHandling();
         $response = $this->post('/product/store', [
             'name' => 'product1',
             'description' => 'this is product one',
@@ -22,6 +21,23 @@ class NewProductListingTest extends TestCase
         ]);
 
         $response->assertOk();
-        $this->count(1, Product::all());
+        $this->assertCount(1, Product::all());
+    }
+
+    /** @test */
+    public function a_product_can_be_deleted()
+    {
+        $this->withoutExceptionHandling();
+        $this->post('/product/store', [
+            'name' => 'product1',
+            'description' => 'this is product one',
+            'price' => 10,
+            'image' => '/images/01'
+        ]);
+
+        $product = Product::first();
+        $this->delete('/product/' . $product->id);
+
+        $this->assertCount(0, Product::all());
     }
 }

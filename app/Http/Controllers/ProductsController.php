@@ -15,4 +15,9 @@ class ProductsController extends Controller
             'image' => request('image'),
         ]);
     }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+    }
 }
