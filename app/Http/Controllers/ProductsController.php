@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ProductRepository;
 use App\Product;
 
 class ProductsController extends Controller
 {
+    private $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     public function store()
     {
-        Product::create([
-            'name' => request('name'),
-            'description' => request('description'),
-            'price' => request('price'),
-            'image' => request('image'),
-        ]);
+        $product = request()->only(['name', 'description', 'price', 'image']);
+        $this->productRepository->new($product);
     }
 
     public function destroy(Product $product)
     {
-        $product->delete();
+        $this->productRepository->remove($product);
     }
 }
