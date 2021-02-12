@@ -14,24 +14,7 @@ class ProductManagementTest extends TestCase
     public function viewing_all_product_list()
     {
         $this->withoutExceptionHandling();
-        $this->post('/product/store', [
-            'name' => 'product1',
-            'description' => 'this is product one',
-            'price' => 10,
-            'image' => '/images/01'
-        ]);
-        $this->post('/product/store', [
-            'name' => 'product2',
-            'description' => 'this is product twoo',
-            'price' => 8,
-            'image' => '/images/02'
-        ]);
-        $this->post('/product/store', [
-            'name' => 'product3',
-            'description' => 'this is product three',
-            'price' => 6,
-            'image' => '/images/03'
-        ]);
+        factory(Product::class, 3)->create();
         $response = $this->get('/products');
 
         $this->assertCount(3, Product::all());
