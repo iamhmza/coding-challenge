@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Product
 Route::get('/products', 'ProductsController@index');
 Route::post('/product/store', 'ProductsController@store');
 Route::delete('/product/{product}', 'ProductsController@destroy');
+
+// Category
+Route::post('/category/store', 'CategoryController@store');
