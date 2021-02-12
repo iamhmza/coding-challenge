@@ -4,18 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
+    private $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     public function store()
     {
-        Category::create([
-            'name' => Request('name')
-        ]);
+        $category = request()->validate(['name' => 'required']);
+        $this->categoryRepository->new($category);
     }
 
     public function destroy(Category $category)
     {
-        $category->delete();
+        $this->categoryRepository->remove($category);
     }
 }
