@@ -13,7 +13,6 @@ class ProductManagementTest extends TestCase
     /** @test */
     public function viewing_all_product_list()
     {
-        $this->withoutExceptionHandling();
         factory(Product::class, 3)->create();
         $response = $this->get('/products');
 
@@ -38,7 +37,6 @@ class ProductManagementTest extends TestCase
     /** @test */
     public function a_product_can_be_deleted()
     {
-        $this->withoutExceptionHandling();
         $this->post('/product/store', [
             'name' => 'product1',
             'description' => 'this is product one',
