@@ -13,4 +13,9 @@ class CategoryController extends Controller
             'name' => Request('name')
         ]);
     }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+    }
 }

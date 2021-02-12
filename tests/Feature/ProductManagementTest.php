@@ -56,7 +56,7 @@ class ProductManagementTest extends TestCase
     public function a_product_can_be_deleted()
     {
         $this->withoutExceptionHandling();
-        $response = $this->post('/product/store', [
+        $this->post('/product/store', [
             'name' => 'product1',
             'description' => 'this is product one',
             'price' => 10,
@@ -64,7 +64,7 @@ class ProductManagementTest extends TestCase
         ]);
 
         $product = Product::first();
-        $this->delete('/product/' . $product->id);
+        $response = $this->delete('/product/' . $product->id);
 
         $this->assertCount(0, Product::all());
         $response->assertRedirect('/products');

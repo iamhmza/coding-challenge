@@ -24,3 +24,4 @@ Route::delete('/product/{product}', 'ProductsController@destroy');
 
 // Category
 Route::post('/category/store', 'CategoryController@store');
+Route::delete('/category/{category}', 'CategoryController@destroy');

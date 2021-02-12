@@ -13,12 +13,23 @@ class CategoryManagementTest extends TestCase
     /** @test */
     public function a_category_can_be_created()
     {
-        $this->withoutExceptionHandling();
         $response = $this->post('/category/store', [
             'name' => 'tech'
         ]);
 
         $response->assertSuccessful();
         $this->assertCount(1, Category::all());
+    }
+
+    /** @test */
+    public function a_category_can_be_deleted()
+    {
+        $this->withoutExceptionHandling();
+        $this->post('/category/store', [
+            'name' => 'tech'
+        ]);
+        $category = Category::first();
+        $response = $this->delete('/category/' . $category->id);
+        $this->assertCount(0, Category::all());
     }
 }
