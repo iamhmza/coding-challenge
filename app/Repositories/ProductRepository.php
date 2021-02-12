@@ -6,6 +6,11 @@ use App\Product;
 
 class ProductRepository
 {
+    public function all()
+    {
+        return Product::all();
+    }
+
     public function new($product)
     {
         return Product::create($product);
@@ -13,6 +18,6 @@ class ProductRepository
 
     public function remove($product)
     {
-      $product->delete();
+        $product->delete();
     }
 }

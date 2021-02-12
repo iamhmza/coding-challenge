@@ -17,5 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/products', 'ProductsController@index');
 Route::post('/product/store', 'ProductsController@store');
 Route::delete('/product/{product}', 'ProductsController@destroy');

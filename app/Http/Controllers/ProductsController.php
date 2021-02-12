@@ -14,6 +14,11 @@ class ProductsController extends Controller
         $this->productRepository = $productRepository;
     }
 
+    public function index()
+    {
+        return $this->productRepository->all();
+    }
+
     public function store()
     {
         $product = request()->only(['name', 'description', 'price', 'image']);
