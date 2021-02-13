@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Spa 
-Route::view('/{any}', 'app')->where('any', '.*');
-
 // Product
 Route::get('/products', 'ProductsController@index');
 Route::post('/product/store', 'ProductsController@store');
@@ -25,3 +22,6 @@ Route::delete('/product/{product}', 'ProductsController@destroy');
 // Category
 Route::post('/category/store', 'CategoryController@store');
 Route::delete('/category/{category}', 'CategoryController@destroy');
+
+// Spa 
+Route::view('/{any}', 'app')->where('any', '.*');

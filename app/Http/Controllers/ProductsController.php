@@ -22,15 +22,14 @@ class ProductsController extends Controller
     public function store()
     {
         $product = request()->only(['name', 'description', 'price', 'image']);
-        $this->productRepository->new($product);
+        $imagePath = request('image')->store('images');
+        $product['image'] = $imagePath;
 
-        return redirect('/products');
+        return $this->productRepository->new($product);
     }
 
     public function destroy(Product $product)
     {
-        $this->productRepository->remove($product);
-
-        return redirect('/products');
+        return $this->productRepository->remove($product);
     }
 }

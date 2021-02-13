@@ -18,10 +18,7 @@ class ProductManagementTest extends TestCase
         // ->has(Category::class, 1)
         // ->create();
 
-        $products = factory(Category::class, 3)->create()->each(function ($p) {
-            $p->products()->save(factory(Product::class)->make());
-        });
-        dd($products);
+        $products = factory(Product::class, 3)->create();
         $response = $this->get('/products');
 
         $this->assertCount(3, Product::all());
@@ -39,7 +36,6 @@ class ProductManagementTest extends TestCase
         ]);
 
         $this->assertCount(1, Product::all());
-        $response->assertRedirect('/products');
     }
 
     /** @test */
@@ -56,6 +52,5 @@ class ProductManagementTest extends TestCase
         $response = $this->delete('/product/' . $product->id);
 
         $this->assertCount(0, Product::all());
-        $response->assertRedirect('/products');
     }
 }

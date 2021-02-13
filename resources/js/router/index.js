@@ -1,4 +1,5 @@
 import Home from '../views/Home.vue'
+import ProductForm from '../views/ProductForm.vue'
 
 export default {
   mode: 'history',
@@ -8,6 +9,11 @@ export default {
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/product',
+      name: 'product',
+      component: ProductForm,
     },
   ]
 }
