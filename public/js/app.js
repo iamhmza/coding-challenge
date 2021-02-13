@@ -2040,21 +2040,51 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      products: []
+      products: [],
+      sortedBy: ""
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    this.getProducts();
+  },
+  methods: {
+    getProducts: function getProducts() {
+      var _this = this;
 
-    axios.get("/products").then(function (_ref) {
-      var data = _ref.data;
-      _this.products = _toConsumableArray(data);
-    })["catch"](function (err) {
-      return console.log("failed", err);
-    });
+      var filter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      console.log("call products");
+      axios.get("/products", {
+        params: filter
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log(data);
+        _this.products = _toConsumableArray(data);
+      })["catch"](function (err) {
+        return console.log("failed", err);
+      });
+    },
+    onFilterChange: function onFilterChange() {
+      this.getProducts({
+        sortedBy: this.sortedBy
+      });
+    }
   }
 });
 
@@ -37976,6 +38006,53 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("div", { staticClass: "form-group mb-3" }, [
+      _c("label", { attrs: { for: "sortBySelect1" } }, [_vm._v("Filter by")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.sortedBy,
+              expression: "sortedBy"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { id: "sortBySelect1" },
+          on: {
+            change: [
+              function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.sortedBy = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              _vm.onFilterChange
+            ]
+          }
+        },
+        [
+          _c("option", { attrs: { disabled: "", value: "" } }, [
+            _vm._v("Please select one")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "name" } }, [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "price" } }, [_vm._v("Price")])
+        ]
+      )
+    ]),
+    _vm._v(" "),
     _vm.products.length > 1
       ? _c("div", [
           _c(

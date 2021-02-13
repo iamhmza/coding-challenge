@@ -16,6 +16,10 @@ class ProductsController extends Controller
 
     public function index()
     {
+        if (request()->has('sortedBy')) {
+            $sortedBy = request()->query('sortedBy');
+            return $this->productRepository->all($sortedBy);
+        }
         return $this->productRepository->all();
     }
 

@@ -6,9 +6,10 @@ use App\Product;
 
 class ProductRepository
 {
-    public function all()
+    public function all($sortedBy = 'created_at')
     {
-        return Product::all();
+        // Product::all();
+        return Product::orderBy($sortedBy)->get();
     }
 
     public function new($product)

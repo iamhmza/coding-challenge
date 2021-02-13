@@ -1,5 +1,19 @@
 <template>
   <div>
+    <div class="form-group mb-3">
+      <label for="sortBySelect1">Filter by</label>
+      <select
+        class="form-control"
+        id="sortBySelect1"
+        v-model="sortedBy"
+        v-on:change="onFilterChange"
+      >
+        <option disabled value="">Please select one</option>
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+      </select>
+    </div>
+
     <div v-if="products.length > 1">
       <div class="row">
         <div class="col-sm" v-for="product in products" :key="product.id">
@@ -26,15 +40,28 @@ export default {
   data() {
     return {
       products: [],
+      sortedBy: "",
     };
   },
   mounted() {
-    axios
-      .get("/products")
-      .then(({ data }) => {
-        this.products = [...data];
-      })
-      .catch((err) => console.log("failed", err));
+    this.getProducts();
+  },
+  methods: {
+    getProducts(filter = {}) {
+      console.log("call products");
+      axios
+        .get("/products", {
+          params: filter,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          this.products = [...data];
+        })
+        .catch((err) => console.log("failed", err));
+    },
+    onFilterChange() {
+      this.getProducts({ sortedBy: this.sortedBy });
+    },
   },
 };
 </script>
