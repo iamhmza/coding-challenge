@@ -21,7 +21,7 @@ class ProductsController extends Controller
 
     public function store()
     {
-        $product = request()->only(['name', 'description', 'price', 'image']);
+        $product = request()->only(['name', 'description', 'price', 'image', 'category_id']);
         $imagePath = request('image')->store('images');
         $product['image'] = $imagePath;
 

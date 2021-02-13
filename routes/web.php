@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 // Product
 Route::get('/products', 'ProductsController@index');
 Route::post('/product/store', 'ProductsController@store');
 Route::delete('/product/{product}', 'ProductsController@destroy');
 
 // Category
+Route::get('/categories', 'CategoryController@index');
 Route::post('/category/store', 'CategoryController@store');
 Route::delete('/category/{category}', 'CategoryController@destroy');
 
-// Spa 
+// Spa
 Route::view('/{any}', 'app')->where('any', '.*');

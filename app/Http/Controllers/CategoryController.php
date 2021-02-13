@@ -15,6 +15,11 @@ class CategoryController extends Controller
         $this->categoryRepository = $categoryRepository;
     }
 
+    public function index()
+    {
+        return $this->categoryRepository->all();
+    }
+
     public function store()
     {
         $category = request()->validate(['name' => 'required']);

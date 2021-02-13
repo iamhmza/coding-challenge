@@ -12,5 +12,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'description' => $faker->sentence,
         'image' => Str::random(6),
         'price' => 10,
+        'category_id' => factory('App\Category')
     ];
 });

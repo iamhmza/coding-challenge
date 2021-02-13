@@ -6,6 +6,11 @@ use App\Category;
 
 class CategoryRepository
 {
+    public function all()
+    {
+        return Category::all();
+    }
+
     public function new($category)
     {
         return Category::create($category);
