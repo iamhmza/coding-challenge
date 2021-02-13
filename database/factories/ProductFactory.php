@@ -8,11 +8,9 @@ use Illuminate\Support\Str;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-        //
         'name' => $this->faker->name,
-        'description' => Str::random(10),
+        'description' => $faker->sentence,
         'image' => Str::random(6),
         'price' => 10,
-        'category_id' => 1
     ];
 });

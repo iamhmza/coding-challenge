@@ -8,8 +8,8 @@ class Product extends Model
 {
     protected $guarded = [];
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany('App\Category', 'category_id');
+        return $this->belongsTo('App\Category');
     }
 }

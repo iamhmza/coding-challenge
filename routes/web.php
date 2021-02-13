@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// Spa 
+Route::view('/{any}', 'app')->where('any', '.*');
 
 // Product
 Route::get('/products', 'ProductsController@index');

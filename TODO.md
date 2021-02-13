@@ -1,8 +1,8 @@
 ## Simple Store
   - Product management 
-  [] viewing products listing
-  [] adding product
-  [] deleting product
+  [x] viewing products listing
+  [x] adding product
+  [x] deleting product
   - category management
-  [] add category
-  [] delete category 
+  [x] add category
+  [x] delete category 

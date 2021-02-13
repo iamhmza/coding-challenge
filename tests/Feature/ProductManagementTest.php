@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Category;
 use App\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -13,7 +14,14 @@ class ProductManagementTest extends TestCase
     /** @test */
     public function viewing_all_product_list()
     {
-        factory(Product::class, 3)->create();
+        // $products = factory(Product::class, 3)
+        // ->has(Category::class, 1)
+        // ->create();
+
+        $products = factory(Category::class, 3)->create()->each(function ($p) {
+            $p->products()->save(factory(Product::class)->make());
+        });
+        dd($products);
         $response = $this->get('/products');
 
         $this->assertCount(3, Product::all());

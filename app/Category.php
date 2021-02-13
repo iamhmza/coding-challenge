@@ -10,16 +10,16 @@ class Category extends Model
 
     public function parent()
     {
-        return $this->belongsTo('App\Category', 'category_id');
+        return $this->belongsTo('App\Category');
     }
 
     public function children()
     {
-        return $this->hasMany('App\Category', 'category_id');
+        return $this->hasMany('App\Category');
     }
 
     public function products()
     {
-        return $this->hasMany('App\Product', 'product_id');
+        return $this->hasMany('App\Product');
     }
 }
